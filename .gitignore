@@ -32,5 +32,8 @@ build/
 
 ### Maven ###
 
+### Swagger2 doc ###
+/best-generator/docs
+
 ### log ###
-/log/
+/best-api/log/
