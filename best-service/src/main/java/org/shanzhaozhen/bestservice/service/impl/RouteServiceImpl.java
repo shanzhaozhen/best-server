@@ -52,15 +52,15 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     @Transactional
-    public RouteDTO addRoute(RouteDTO routeDTO) {
+    public Long addRoute(RouteDTO routeDTO) {
         RouteDO routeDO = RouteConverter.toDO(routeDTO);
         routeMapper.insert(routeDO);
-        return routeDTO;
+        return routeDO.getId();
     }
 
     @Override
     @Transactional
-    public RouteDTO updateRoute(RouteDTO routeDTO) {
+    public Long updateRoute(RouteDTO routeDTO) {
         Assert.notNull(routeDTO.getId(), "更新失败：路由id不能为空");
         Assert.isTrue(!routeDTO.getId().equals(routeDTO.getPid()), "更新失败：上级节点不能选择自己");
         if (routeDTO.getPid() != null) {
@@ -77,13 +77,14 @@ public class RouteServiceImpl implements RouteService {
         } catch (StackOverflowError e) {
             throw new IllegalArgumentException("更新失败：请检查路由的节点设置是否有问题");
         }
-        return routeDTO;
+        return routeDO.getId();
     }
 
     @Override
     @Transactional
-    public Boolean deleteRoute(Long routeId) {
-        return SqlHelper.retBool(routeMapper.deleteById(routeId));
+    public Long deleteRoute(Long routeId) {
+        routeMapper.deleteById(routeId);
+        return routeId;
     }
 
 }

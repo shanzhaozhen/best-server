@@ -42,7 +42,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Page<RoleDTO> getRolePage(BaseSearchForm<RoleDTO> baseSearchForm) {
-        return roleMapper.getRolePage(baseSearchForm.getPage(baseSearchForm), baseSearchForm.getKeyword());
+        return roleMapper.getRolePage(baseSearchForm.getPage(), baseSearchForm.getKeyword());
+    }
+
+    @Override
+    public List<RoleDTO> getAllRoles() {
+        return roleMapper.getAllRoles();
     }
 
     @Override
@@ -54,18 +59,18 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public RoleDTO addRole(RoleDTO roleDTO) {
+    public Long addRole(RoleDTO roleDTO) {
         RoleDTO roleInDB = roleMapper.getRoleByIdentification(roleDTO.getIdentification());
         Assert.isNull(roleInDB, "创建失败：标识名称已被占用");
         RoleDO roleDO = RoleConverter.toDO(roleDTO);
         roleMapper.insert(roleDO);
         updateRouteAndResource(roleDO.getId(), roleDTO.getRouteIds(), roleDTO.getResourceIds());
-        return roleDTO;
+        return roleDO.getId();
     }
 
     @Override
     @Transactional
-    public RoleDTO updateRole(RoleDTO roleDTO) {
+    public Long updateRole(RoleDTO roleDTO) {
         Assert.notNull(roleDTO.getId(), "角色id不能为空");
         RoleDTO roleInDB = roleMapper.getRoleByIdNotInAndIdentification(roleDTO.getId(), roleDTO.getIdentification());
         Assert.isNull(roleInDB, "更新失败：标识名称已被占用");
@@ -74,15 +79,16 @@ public class RoleServiceImpl implements RoleService {
         CustomBeanUtils.copyPropertiesExcludeMeta(roleDTO, roleDO);
         roleMapper.updateById(roleDO);
         updateRouteAndResource(roleDO.getId(), roleDTO.getRouteIds(), roleDTO.getResourceIds());
-        return roleDTO;
+        return roleDO.getId();
     }
 
     @Override
     @Transactional
-    public Boolean deleteRole(Long roleId) {
+    public Long deleteRole(Long roleId) {
         roleRouteMapper.deleteByRoleId(roleId);
         roleResourceMapper.deleteByRoleId(roleId);
-        return SqlHelper.retBool(roleMapper.deleteById(roleId));
+        roleMapper.deleteById(roleId);
+        return roleId;
     }
 
     @Override

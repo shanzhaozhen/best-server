@@ -19,7 +19,7 @@
         <result column="breadcrumb" property="breadcrumb" />
         <result column="props" property="props" />
         <result column="description" property="description" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />
@@ -32,7 +32,7 @@
     </resultMap>
 
     <select id="getRouteRoleListByUserId" resultMap="RouteRoleMap">
-        select * from sys_route r1
+        select distinct r1.* from sys_route r1
         <if test="userId != null">
             inner join sys_role_route srr on srr.route_id = r1.id
             inner join sys_role r2 on r2.id = srr.role_id

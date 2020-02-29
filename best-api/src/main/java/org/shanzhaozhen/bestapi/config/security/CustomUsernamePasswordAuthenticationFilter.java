@@ -3,7 +3,7 @@ package org.shanzhaozhen.bestapi.config.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.shanzhaozhen.bestcommon.common.sys.JwtErrorConst;
 import org.shanzhaozhen.bestcommon.dto.UserDTO;
-import org.shanzhaozhen.bestcommon.form.UserForm;
+import org.shanzhaozhen.bestcommon.form.UserLoginForm;
 import org.shanzhaozhen.bestcommon.utils.HttpServletResponseUtils;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -11,7 +11,6 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,8 +18,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -39,9 +36,9 @@ public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenti
         }
 
         try {
-            UserForm userForm = new ObjectMapper().readValue(httpServletRequest.getInputStream(), UserForm.class);
-            String username = userForm.getUsername();
-            String password = userForm.getPassword();
+            UserLoginForm userLoginForm = new ObjectMapper().readValue(httpServletRequest.getInputStream(), UserLoginForm.class);
+            String username = userLoginForm.getUsername();
+            String password = userLoginForm.getPassword();
 
             if (username == null) {
                 username = "";
@@ -77,19 +74,8 @@ public class CustomUsernamePasswordAuthenticationFilter extends AbstractAuthenti
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
-
         UserDTO userDTO = (UserDTO) authResult.getPrincipal();
-
-        List<GrantedAuthority> authorities = (List<GrantedAuthority>) authResult.getAuthorities();
-        List<String> roles = new ArrayList<>();
-        for(GrantedAuthority g : authorities) {
-            roles.add(g.getAuthority());
-        }
-
-        String token = customJwtTokenProvider.createToken(userDTO.getId(), userDTO.getUsername(), roles);
-
-//         返回创建成功的token
-//        response.setHeader(header, token);
+        String token = customJwtTokenProvider.buildToken(userDTO.getId(), userDTO.getUsername());
 
         // 登陆成功返回
         HttpServletResponseUtils.resultJson(response, HttpServletResponse.SC_OK,

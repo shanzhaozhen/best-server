@@ -14,7 +14,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         Long userId = UserDetailsUtils.getUserId();
         this.setFieldValByName("createdDate", new Date(), metaObject);
-        this.setFieldValByName("createBy", userId, metaObject);
+        this.setFieldValByName("createdBy", userId, metaObject);
         this.setFieldValByName("lastModifiedDate", new Date(), metaObject);
         this.setFieldValByName("lastModifiedBy", userId, metaObject);
     }

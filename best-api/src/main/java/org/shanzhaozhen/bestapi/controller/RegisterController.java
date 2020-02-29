@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.shanzhaozhen.bestcommon.converter.UserConverter;
-import org.shanzhaozhen.bestcommon.form.UserForm;
+import org.shanzhaozhen.bestcommon.form.UserLoginForm;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
 import org.shanzhaozhen.bestservice.service.UserService;
 import org.springframework.validation.annotation.Validated;
@@ -25,8 +25,8 @@ public class RegisterController {
 
     @PostMapping(REGISTER)
     @ApiOperation("用户注册接口")
-    public ResultObject<Long> register(@RequestBody @Validated UserForm userForm) {
-        return ResultObject.build(result -> sysUserService.register(UserConverter.formToDTO(userForm)));
+    public ResultObject<Long> register(@RequestBody @Validated UserLoginForm userLoginForm) {
+        return ResultObject.build(result -> sysUserService.register(UserConverter.toDTO(userLoginForm)));
     }
 
     @GetMapping(CHECK_USERNAME)

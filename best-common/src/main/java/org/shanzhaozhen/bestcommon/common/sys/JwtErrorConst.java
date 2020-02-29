@@ -14,7 +14,7 @@ public enum JwtErrorConst {
 
     JWT_UNSUPPORTED(4014, "不支持该token"),
 
-    JWT_ILLEGALARGUMENT(4015, "token参数异常"),
+    JWT_ILLEGAL_ARGUMENT(4015, "token参数异常"),
 
     JWT_ERROR(4016, "token错误");
 

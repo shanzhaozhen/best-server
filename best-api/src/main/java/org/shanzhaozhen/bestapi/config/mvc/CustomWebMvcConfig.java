@@ -19,11 +19,11 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
 
     private String realPath;
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/login").setViewName("public/login");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);                                  //过滤时优先执行
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+////        registry.addViewController("/login").setViewName("public/login");
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);                                  //过滤时优先执行
+//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

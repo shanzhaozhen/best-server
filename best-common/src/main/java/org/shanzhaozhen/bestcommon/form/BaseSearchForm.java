@@ -38,12 +38,12 @@ public class BaseSearchForm<T> {
 
     /**
      * 生成mybatis的分页实体
-     * @param baseSearchForm
+     * @param
      * @return
      */
-    public Page<T> getPage(BaseSearchForm<T> baseSearchForm) {
-        Page<T> page = new Page<>(baseSearchForm.getCurrent(), baseSearchForm.getSize());
-        page.setOrders(baseSearchForm.getOrders());
+    public Page<T> getPage() {
+        Page<T> page = new Page<>(this.current, this.size);
+        page.setOrders(this.getOrders());
         return page;
     }
 

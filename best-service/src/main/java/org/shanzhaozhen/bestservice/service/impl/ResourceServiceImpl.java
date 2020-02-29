@@ -1,6 +1,5 @@
 package org.shanzhaozhen.bestservice.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import org.shanzhaozhen.bestcommon.converter.ResourceConverter;
 import org.shanzhaozhen.bestcommon.domain.sys.ResourceDO;
 import org.shanzhaozhen.bestcommon.dto.ResourceDTO;
@@ -42,15 +41,15 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     @Transactional
-    public ResourceDTO addResource(ResourceDTO resourceDTO) {
+    public Long addResource(ResourceDTO resourceDTO) {
         ResourceDO resourceDO = ResourceConverter.toDO(resourceDTO);
         resourceMapper.insert(resourceDO);
-        return resourceDTO;
+        return resourceDO.getId();
     }
 
     @Override
     @Transactional
-    public ResourceDTO updateResource(ResourceDTO resourceDTO) {
+    public Long updateResource(ResourceDTO resourceDTO) {
         Assert.notNull(resourceDTO.getId(), "更新失败：资源id不能为空");
         Assert.isTrue(!resourceDTO.getId().equals(resourceDTO.getPid()), "更新失败：上级节点不能选择自己");
         if (resourceDTO.getPid() != null) {
@@ -67,13 +66,14 @@ public class ResourceServiceImpl implements ResourceService {
         } catch (StackOverflowError e) {
             throw new IllegalArgumentException("更新失败：请检查资源的节点设置是否有问题");
         }
-        return resourceDTO;
+        return resourceDO.getId();
     }
 
     @Override
     @Transactional
-    public Boolean deleteResource(Long resourceId) {
-        return SqlHelper.retBool(resourceMapper.deleteById(resourceId));
+    public Long deleteResource(Long resourceId) {
+        resourceMapper.deleteById(resourceId);
+        return resourceId;
     }
 
 }

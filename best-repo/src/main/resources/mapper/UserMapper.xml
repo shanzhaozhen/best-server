@@ -20,7 +20,7 @@
         <result column="phone_number" property="phoneNumber" />
         <result column="address" property="address" />
         <result column="introduction" property="introduction" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />
@@ -32,9 +32,20 @@
         </collection>
     </resultMap>
 
+    <resultMap autoMapping="true" type="org.shanzhaozhen.bestcommon.dto.JWTUser" id="JWTUserMap">
+        <id property="id" column="id"></id>
+        <collection property="authorities" column="id" select="org.shanzhaozhen.bestrepo.mapper.RoleMapper.getAuthoritiesByUserId">
+        </collection>
+    </resultMap>
+
+
     <select id="getUserAndRolesByUserId" resultMap="UserRoleMap">
         select id, username, password, account_non_expired, account_non_locked, credentials_non_expired, enabled,
         name, nickname, sex, birthday, avatar, email, phone_number, address, introduction from sys_user where id = #{id}
+    </select>
+
+    <select id="getJWTUserByUserId" resultMap="JWTUserMap">
+        select id, username from sys_user where id = #{id}
     </select>
 
 </mapper>

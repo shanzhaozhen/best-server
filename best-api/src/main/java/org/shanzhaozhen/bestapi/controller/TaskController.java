@@ -49,14 +49,14 @@ public class TaskController {
 
     @PostMapping(ADD_TASK)
     @ApiOperation("添加定时任务接口")
-    public ResultObject<DynamicScheduledTaskVO> addDynamicScheduledTask(@RequestBody @Validated({Insert.class}) DynamicScheduledTaskForm dynamicScheduledTaskForm) {
-        return ResultObject.build(result -> DynamicScheduledTaskConverter.toVO(taskService.addTask(DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskForm))));
+    public ResultObject<Long> addDynamicScheduledTask(@RequestBody @Validated({Insert.class}) DynamicScheduledTaskForm dynamicScheduledTaskForm) {
+        return ResultObject.build(result -> taskService.addTask(DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskForm)));
     }
 
     @PutMapping(UPDATE_TASK)
     @ApiOperation("更新定时任务接口")
-    public ResultObject<DynamicScheduledTaskVO> updateDynamicScheduledTask(@RequestBody @Validated({Update.class}) DynamicScheduledTaskForm dynamicScheduledTaskForm) {
-        return ResultObject.build(result -> DynamicScheduledTaskConverter.toVO(taskService.updateTask(DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskForm))));
+    public ResultObject<Long> updateDynamicScheduledTask(@RequestBody @Validated({Update.class}) DynamicScheduledTaskForm dynamicScheduledTaskForm) {
+        return ResultObject.build(result -> taskService.updateTask(DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskForm)));
     }
 
     @DeleteMapping(DELETE_TASK)

@@ -1,7 +1,12 @@
 package org.shanzhaozhen.bestservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.shanzhaozhen.bestcommon.dto.JWTUser;
 import org.shanzhaozhen.bestcommon.dto.UserDTO;
+import org.shanzhaozhen.bestcommon.form.BaseSearchForm;
 import org.shanzhaozhen.bestcommon.vo.UserInfo;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -10,7 +15,7 @@ public interface UserService {
      * @param userId
      * @return
      */
-    UserDTO getUserByUserId(Long userId);
+    UserDTO getUserById(Long userId);
 
     /**
      * 通过用户名查找用户
@@ -19,6 +24,12 @@ public interface UserService {
      */
     UserDTO getUserByUsername(String username);
 
+    /**
+     * 通过用户id获取JWT认证用户信息
+     * @param userId
+     * @return
+     */
+    JWTUser getJWTUser(Long userId);
 
     /**
      * 获取当前用户
@@ -44,4 +55,40 @@ public interface UserService {
      * @return
      */
     UserInfo getUserInfo();
+
+    /**
+     * 获取用户的分页列表
+     * @param baseSearchForm
+     * @return
+     */
+    Page<UserDTO> getUserPage(BaseSearchForm<UserDTO> baseSearchForm);
+
+    /**
+     * 新增用户
+     * @param userDTO
+     * @return
+     */
+    Long addUser(UserDTO userDTO);
+
+    /**
+     * 修改角色
+     * @param userDTO
+     * @return
+     */
+    Long updateUser(UserDTO userDTO);
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    Long deleteUser(Long userId);
+
+    /**
+     * 批量添加用户角色
+     * @param userId
+     * @param roleIds
+     */
+    void bathAddUserRole(Long userId, List<Long> roleIds);
+
 }

@@ -1,10 +1,12 @@
 package org.shanzhaozhen.bestrepo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.shanzhaozhen.bestcommon.domain.sys.UserDO;
 import org.shanzhaozhen.bestcommon.dto.UserDTO;
+import org.shanzhaozhen.bestcommon.dto.JWTUser;
 
 public interface UserMapper extends BaseMapper<UserDO> {
 
@@ -24,8 +26,15 @@ public interface UserMapper extends BaseMapper<UserDO> {
 
     UserDTO getUserAndRolesByUserId(@Param("id") Long id);
 
+    JWTUser getJWTUserByUserId(Long userId);
+
     @Select("select id, username, password, account_non_expired, account_non_locked, credentials_non_expired, enabled, " +
             "name, nickname, sex, birthday, avatar, email, phone_number, address, introduction from sys_user where username = #{username}")
     UserDTO getUserByUsername(@Param("username") String username);
 
+    @Select("select id, username, account_non_expired, account_non_locked, credentials_non_expired, enabled, " +
+            "name, nickname, sex, birthday, avatar, email, phone_number, address, introduction " +
+            "from sys_user where username like concat ('%', #{keyword}, '%') or name like concat ('%', #{keyword}, '%') " +
+            "or nickName like concat ('%', #{keyword}, '%') or introduction like concat ('%', #{keyword}, '%')")
+    Page<UserDTO> getUserPage(Page<UserDTO> page, @Param("keyword") String keyword);
 }

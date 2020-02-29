@@ -123,7 +123,7 @@ public class MybatisPlusCodeGenerator {
         // 公共父类
         strategy.setSuperControllerClass("org.shanzhaozhen.mybatis.common.BaseController");
         // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("createBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
+        strategy.setSuperEntityColumns("createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

@@ -52,19 +52,19 @@ public class ResourceController {
 
     @PostMapping(ADD_RESOURCE)
     @ApiOperation("资源添加接口")
-    public ResultObject<ResourceVO> addResource(@RequestBody @Validated ResourceForm resourceForm) {
-        return ResultObject.build(result -> ResourceConverter.toVO(resourceService.addResource(ResourceConverter.toDTO(resourceForm))));
+    public ResultObject<Long> addResource(@RequestBody @Validated ResourceForm resourceForm) {
+        return ResultObject.build(result -> resourceService.addResource(ResourceConverter.toDTO(resourceForm)));
     }
 
     @PutMapping(UPDATE_RESOURCE)
     @ApiOperation("资源更新接口")
-    public ResultObject<ResourceVO> updateResource(@RequestBody @Validated ResourceForm resourceForm) {
-        return ResultObject.build(result -> ResourceConverter.toVO(resourceService.updateResource(ResourceConverter.toDTO(resourceForm))));
+    public ResultObject<Long> updateResource(@RequestBody @Validated ResourceForm resourceForm) {
+        return ResultObject.build(result -> resourceService.updateResource(ResourceConverter.toDTO(resourceForm)));
     }
 
     @DeleteMapping(DELETE_RESOURCE)
     @ApiOperation("资源删除接口")
-    public ResultObject<Boolean> deleteResource(@PathVariable("resourceId") @ApiParam(name = "资源id", example = "1") Long resourceId) {
+    public ResultObject<Long> deleteResource(@PathVariable("resourceId") @ApiParam(name = "资源id", example = "1") Long resourceId) {
         return ResultObject.build(result -> resourceService.deleteResource(resourceId));
     }
 

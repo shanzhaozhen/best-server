@@ -24,6 +24,12 @@ public interface RoleService {
     Page<RoleDTO> getRolePage(BaseSearchForm<RoleDTO> baseSearchForm);
 
     /**
+     * 获取所有角色
+     * @return
+     */
+    List<RoleDTO> getAllRoles();
+
+    /**
      * 通过角色id获取
      * @param roleId
      * @return
@@ -35,21 +41,21 @@ public interface RoleService {
      * @param roleDTO
      * @return
      */
-    RoleDTO addRole(RoleDTO roleDTO);
+    Long addRole(RoleDTO roleDTO);
 
     /**
      * 修改角色
      * @param roleDTO
      * @return
      */
-    RoleDTO updateRole(RoleDTO roleDTO);
+    Long updateRole(RoleDTO roleDTO);
 
     /**
      * 删除角色(通过角色id删除)
      * @param roleId
-     * @return true 则删除成功，否则删除失败
+     * @return
      */
-    Boolean deleteRole(Long roleId);
+    Long deleteRole(Long roleId);
 
     /**
      * 更新角色与路由和资源的关系表

@@ -73,4 +73,7 @@ public class UserDTO implements UserDetails {
     @ApiModelProperty(value = "记录用户的角色")
     private List<RoleDTO> roles;
 
+    @ApiModelProperty(value = "关联的角色id")
+    private List<Long> roleIds;
+
 }

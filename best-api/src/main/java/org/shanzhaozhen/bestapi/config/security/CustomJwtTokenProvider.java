@@ -5,9 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.shanzhaozhen.bestcommon.common.sys.JwtErrorConst;
+import org.shanzhaozhen.bestcommon.dto.RoleDTO;
 import org.shanzhaozhen.bestcommon.utils.HttpServletResponseUtils;
-import org.shanzhaozhen.bestcommon.vo.JWTUser;
+import org.shanzhaozhen.bestcommon.dto.JWTUser;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
+import org.shanzhaozhen.bestservice.service.RoleService;
+import org.shanzhaozhen.bestservice.service.UserService;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -17,9 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ConfigurationProperties(prefix = "jwt")
 @Getter
@@ -40,6 +41,12 @@ public class CustomJwtTokenProvider {
 
     private long rememberExpiration;
 
+    private final UserService userService;
+
+    public CustomJwtTokenProvider(UserService userService) {
+        this.userService = userService;
+    }
+
     /**
      * 创建token
      *
@@ -51,7 +58,7 @@ public class CustomJwtTokenProvider {
      * iat：发布时间
      * jti：JWT ID用于标识该JWT
      */
-    public String buildToken(String username, Map<String, Object> claims) {
+    public String buildToken(Long id, String username) {
         /**
          * 按照jwt的规定，最后请求的时候应该是 `Bearer token`
          */
@@ -60,7 +67,7 @@ public class CustomJwtTokenProvider {
                  * 如果有私有声明，一定要先设置这个自己创建的私有的声明，这个是给builder的claim赋值
                  * 一旦写在标准的声明赋值之后，就是覆盖了那些标准的声明的
                  */
-                .setClaims(claims)
+                .setId(String.valueOf(id))
                 .setSubject(username)
                 .setIssuer(issuer)          //iss
                 .setIssuedAt(new Date())            //iat: jwt的签发时间
@@ -70,41 +77,14 @@ public class CustomJwtTokenProvider {
     }
 
     /**
-     * 创建token
-     * @param userId
-     * @param username
-     * @param roles
-     * @return
-     */
-    public String createToken(Long userId, String username, List<String> roles) {
-
-        Map<String, Object> claims = new HashMap<>();
-
-        claims.put("id", userId);
-        claims.put("username", username);
-        claims.put("roles", roles);
-
-        return this.buildToken(username, claims);
-    }
-
-    /**
      * 更新token
      * @param token
      * @return
      */
     public String updateToken(String token) {
         Assert.hasText(token, "token不能为空");
-
-        Claims oldClaims = this.getTokenBody(token);
-        String username = oldClaims.getSubject();
-
-        Map<String, Object> newClaims = new HashMap<>();
-
-        newClaims.put("id", oldClaims.get("id", Long.class));
-        newClaims.put("username", username);
-        newClaims.put("roles", oldClaims.get("roles", List.class));
-
-        return this.buildToken(username, newClaims);
+        Claims claims = this.getJWTBody(token);
+        return this.buildToken(Long.valueOf(claims.getId()), claims.getSubject());
     }
 
     /**
@@ -140,7 +120,7 @@ public class CustomJwtTokenProvider {
         } catch (IllegalArgumentException ex) {
             log.error("JWT claims string is empty.");
             HttpServletResponseUtils.resultJson(httpServletResponse, HttpServletResponse.SC_UNAUTHORIZED,
-                    new ResultObject<>(JwtErrorConst.JWT_ILLEGALARGUMENT));
+                    new ResultObject<>(JwtErrorConst.JWT_ILLEGAL_ARGUMENT));
         } catch (JwtException ex) {
             log.error("JWT error.");
             HttpServletResponseUtils.resultJson(httpServletResponse, HttpServletResponse.SC_UNAUTHORIZED,
@@ -168,7 +148,7 @@ public class CustomJwtTokenProvider {
      * @return
      */
     public String getUsername(String token) {
-        return getTokenBody(token).getSubject();
+        return getJWTBody(token).getSubject();
     }
 
     /**
@@ -177,16 +157,7 @@ public class CustomJwtTokenProvider {
      * @return
      */
     public Long getUserId(String token) {
-        return Long.parseLong(String.valueOf(getTokenBody(token).get("id")));
-    }
-
-    /**
-     * 获取用户角色
-     * @param token
-     * @return
-     */
-    public List<String> getUserRoles(String token) {
-        return getTokenBody(token).get("roles", List.class);
+        return Long.valueOf(getJWTBody(token).getId());
     }
 
     /**
@@ -195,12 +166,12 @@ public class CustomJwtTokenProvider {
      * @return
      */
     public JWTUser getJWTUser(String token) {
-        Claims claims = getTokenBody(token);
-        return JWTUser.builder()
-                .id(Long.parseLong(String.valueOf(claims.get("id"))))
-                .username(claims.getSubject())
-                .authorities(claims.get("roles", List.class))
-                .build();
+        Claims claims = getJWTBody(token);
+        Long useId = Long.valueOf(claims.getId());
+        Assert.notNull(useId, "没有相关的用户ID信息");
+        JWTUser jwtUser = userService.getJWTUser(useId);
+        Assert.notNull(jwtUser, "没有找到当前用户信息");
+        return jwtUser;
     }
 
     /**
@@ -209,10 +180,10 @@ public class CustomJwtTokenProvider {
      * @return
      */
     public boolean isExpiration(String token){
-        return getTokenBody(token).getExpiration().before(new Date());
+        return getJWTBody(token).getExpiration().before(new Date());
     }
 
-    private Claims getTokenBody(String token) {
+    private Claims getJWTBody(String token) {
         token = token.replace(tokenHead, "");
 
         return Jwts.parser()

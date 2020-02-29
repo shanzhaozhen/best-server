@@ -7,7 +7,7 @@
         <id column="id" property="id" />
         <result column="role_id" property="roleId" />
         <result column="resource_id" property="resourceId" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />

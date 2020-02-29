@@ -40,9 +40,6 @@ public class UserVO {
     @ApiModelProperty(value = "是否被禁用,禁用的用户不能身份验证")
     private boolean enabled;
 
-    @TableField(exist = false)
-    private List<RoleDTO> roleDOs;
-
     @ApiModelProperty(value = "姓名")
     private String name;
 
@@ -69,5 +66,8 @@ public class UserVO {
 
     @ApiModelProperty(value = "个人介绍")
     private String introduction;
+
+    @ApiModelProperty(value = "关联的角色id")
+    private List<Long> roleIds;
 
 }

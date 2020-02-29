@@ -33,14 +33,14 @@ public interface TaskService {
      * @param dynamicScheduledTaskDTO
      * @return
      */
-    DynamicScheduledTaskDTO addTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO);
+    Long addTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO);
 
     /**
      * 修改定时任务
      * @param dynamicScheduledTaskDTO
      * @return
      */
-    DynamicScheduledTaskDTO updateTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO);
+    Long updateTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO);
 
     /**
      * 检查定时任务调用的方式和参数是否有误

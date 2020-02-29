@@ -1,6 +1,6 @@
 package org.shanzhaozhen.bestcommon.utils;
 
-import org.shanzhaozhen.bestcommon.vo.JWTUser;
+import org.shanzhaozhen.bestcommon.dto.JWTUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

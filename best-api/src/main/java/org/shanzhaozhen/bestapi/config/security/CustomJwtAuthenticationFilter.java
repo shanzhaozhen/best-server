@@ -1,9 +1,7 @@
 package org.shanzhaozhen.bestapi.config.security;
 
-import org.shanzhaozhen.bestcommon.vo.JWTUser;
+import org.shanzhaozhen.bestcommon.dto.JWTUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -14,8 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
@@ -68,19 +64,8 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
      * @return
      */
     private UsernamePasswordAuthenticationToken createAuthentication(String token) {
-
         JWTUser jwtUser = customJwtTokenProvider.getJWTUser(token);
-
-        if (StringUtils.isEmpty(jwtUser.getUsername())) {
-            return null;
-        }
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (String role : jwtUser.getAuthorities()) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-
-        return new UsernamePasswordAuthenticationToken(jwtUser, null, authorities);
+        return new UsernamePasswordAuthenticationToken(jwtUser, null, jwtUser.getAuthorities());
     }
 
 

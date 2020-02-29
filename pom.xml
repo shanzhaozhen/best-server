@@ -39,6 +39,7 @@
         <swagger.version>2.9.2</swagger.version>
         <druid.version>1.1.21</druid.version>
         <fastjson.version>1.2.62</fastjson.version>
+        <annotations.version>3.0.1</annotations.version>
     </properties>
 
     <dependencyManagement>
@@ -134,6 +135,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${annotations.version}</version>
         </dependency>
 
     </dependencies>

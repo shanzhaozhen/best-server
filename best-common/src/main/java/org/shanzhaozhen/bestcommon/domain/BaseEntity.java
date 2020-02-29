@@ -20,7 +20,7 @@ public class BaseEntity implements Serializable {
 
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建人")
-    private Long createBy;
+    private Long createdBy;
 
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
     @TableField(fill = FieldFill.INSERT)

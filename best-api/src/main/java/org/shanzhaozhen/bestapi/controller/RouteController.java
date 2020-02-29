@@ -43,19 +43,19 @@ public class RouteController {
 
     @PostMapping(ADD_ROUTE)
     @ApiOperation("添加路由接口")
-    public ResultObject<RouteVO> addRoute(@RequestBody @Validated RouteForm routeForm) {
-        return ResultObject.build(result -> RouteConverter.toVO(routeService.addRoute(RouteConverter.toDTO(routeForm))));
+    public ResultObject<Long> addRoute(@RequestBody @Validated RouteForm routeForm) {
+        return ResultObject.build(result -> routeService.addRoute(RouteConverter.toDTO(routeForm)));
     }
 
     @PutMapping(UPDATE_ROUTE)
     @ApiOperation("更新路由接口")
-    public ResultObject<RouteVO> updateRoute(@RequestBody @Validated RouteForm routeForm) {
-        return ResultObject.build(result -> RouteConverter.toVO(routeService.updateRoute(RouteConverter.toDTO(routeForm))));
+    public ResultObject<Long> updateRoute(@RequestBody @Validated RouteForm routeForm) {
+        return ResultObject.build(result -> routeService.updateRoute(RouteConverter.toDTO(routeForm)));
     }
 
     @DeleteMapping(DELETE_ROUTE)
     @ApiOperation("删除路由接口")
-    public ResultObject<Boolean> deleteRoute(@PathVariable("routeId") @ApiParam(name = "路由id", example = "1") Long routeId) {
+    public ResultObject<Long> deleteRoute(@PathVariable("routeId") @ApiParam(name = "路由id", example = "1") Long routeId) {
         return ResultObject.build(result -> routeService.deleteRoute(routeId));
     }
 

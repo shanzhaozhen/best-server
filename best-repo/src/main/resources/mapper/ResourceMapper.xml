@@ -11,7 +11,7 @@
         <result column="pid" property="pid" />
         <result column="priority" property="priority" />
         <result column="description" property="description" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />
@@ -25,7 +25,7 @@
 
     <select id="getResourceListByType" resultType="org.shanzhaozhen.bestcommon.dto.ResourceDTO">
         select re.id, re.name, re.path, re.type, re.pid, re.priority, re.description,
-            re.create_by, re.created_date, re.last_modified_by, re.last_modified_date
+            re.created_by, re.created_date, re.last_modified_by, re.last_modified_date
         from sys_resource re
         <if test="type != null">
             where re.type = #{type}

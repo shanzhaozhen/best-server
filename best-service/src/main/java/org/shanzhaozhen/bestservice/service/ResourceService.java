@@ -31,20 +31,20 @@ public interface ResourceService {
      * @param resourceDTO
      * @return
      */
-    ResourceDTO addResource(ResourceDTO resourceDTO);
+    Long addResource(ResourceDTO resourceDTO);
 
     /**
      * 修改资源
      * @param resourceDTO
      * @return
      */
-    ResourceDTO updateResource(ResourceDTO resourceDTO);
+    Long updateResource(ResourceDTO resourceDTO);
 
     /**
      * 删除资源(通过资源id删除)
      * @param resourceId
-     * @return true 则删除成功，否则删除失败
+     * @return
      */
-    Boolean deleteResource(Long resourceId);
+    Long deleteResource(Long resourceId);
 
 }

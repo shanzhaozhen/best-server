@@ -12,7 +12,7 @@
         <result column="param_info" property="paramInfo" />
         <result column="open" property="open" />
         <result column="description" property="description" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CustomBeanUtils extends BeanUtils {
 
-    private static List<String> metaList = Arrays.asList("createdDate", "createBy", "lastModifiedDate", "lastModifiedBy");
+    private static List<String> metaList = Arrays.asList("createdDate", "createdBy", "lastModifiedDate", "lastModifiedBy");
 
     public static void copyPropertiesExcludeMeta(Object source, Object target, @Nullable String... ignoreProperties) {
         List<String> newMetas = new ArrayList<>(metaList);

@@ -39,7 +39,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Page<DynamicScheduledTaskDTO> getTaskPage(BaseSearchForm<DynamicScheduledTaskDTO> baseSearchForm) {
-        return dynamicScheduledTaskMapper.getDynamicScheduledTaskPage(baseSearchForm.getPage(baseSearchForm), baseSearchForm.getKeyword());
+        return dynamicScheduledTaskMapper.getDynamicScheduledTaskPage(baseSearchForm.getPage(), baseSearchForm.getKeyword());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public DynamicScheduledTaskDTO addTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO) {
+    public Long addTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO) {
         Assert.isTrue(CronSequenceGenerator.isValidExpression(dynamicScheduledTaskDTO.getCron()), "cron表达式不正确");
         DynamicScheduledTaskDO dynamicScheduledTaskDO = DynamicScheduledTaskConverter.toDO(dynamicScheduledTaskDTO);
         this.validateTask(dynamicScheduledTaskDTO);
@@ -64,12 +64,12 @@ public class TaskServiceImpl implements TaskService {
         if (dynamicScheduledTaskDO.getOpen()) {
             this.startTask(dynamicScheduledTaskDTO);
         }
-        return DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskDO);
+        return dynamicScheduledTaskDO.getId();
     }
 
     @Override
     @Transactional
-    public DynamicScheduledTaskDTO updateTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO) {
+    public Long updateTask(DynamicScheduledTaskDTO dynamicScheduledTaskDTO) {
         Assert.notNull(dynamicScheduledTaskDTO.getId(), "定时任务id不能为空");
         DynamicScheduledTaskDO dynamicScheduledTaskDO = dynamicScheduledTaskMapper.selectById(dynamicScheduledTaskDTO.getId());
         Assert.notNull(dynamicScheduledTaskDO, "更新失败：没有找到该定时任务或已被删除");
@@ -82,7 +82,7 @@ public class TaskServiceImpl implements TaskService {
         } else {
             this.stopTask(dynamicScheduledTaskDO.getId());
         }
-        return DynamicScheduledTaskConverter.toDTO(dynamicScheduledTaskDO);
+        return dynamicScheduledTaskDO.getId();
     }
 
     @Override

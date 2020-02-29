@@ -8,7 +8,7 @@
         <result column="name" property="name" />
         <result column="identification" property="identification" />
         <result column="description" property="description" />
-        <result column="create_by" property="createBy" />
+        <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
         <result column="last_modified_by" property="lastModifiedBy" />
         <result column="last_modified_date" property="lastModifiedDate" />
@@ -24,7 +24,7 @@
 
     <select id="getRoleByRoleId" resultMap="RoleResourceMap">
         select id, name, identification, description,
-        create_by, created_date, last_modified_by, last_modified_date
+        created_by, created_date, last_modified_by, last_modified_date
         from sys_role
         where id = #{roleId}
     </select>

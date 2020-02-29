@@ -16,11 +16,14 @@ import org.shanzhaozhen.bestservice.service.RoleService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api("用户角色接口")
 @RestController
 public class RoleController {
 
     private final String GET_ROLE_PAGE = "/role/page";
+    private final String GET_ROLE_ALL = "/role/all";
     private final String GET_ROLE_BY_ID = "/role/{roleId}";
     private final String ADD_ROLE = "/role";
     private final String UPDATE_ROLE = "/role";
@@ -38,6 +41,12 @@ public class RoleController {
         return ResultObject.build(result -> RoleConverter.toVO(roleService.getRolePage(baseSearchForm)));
     }
 
+    @GetMapping(GET_ROLE_ALL)
+    @ApiOperation("获取所有角色")
+    public ResultObject<List<RoleVO>> getAllRoles() {
+        return ResultObject.build(result -> RoleConverter.toVO(roleService.getAllRoles()));
+    }
+
     @GetMapping(GET_ROLE_BY_ID)
     @ApiOperation("获取角色信息（通过角色id）")
     public ResultObject<RoleVO> getRoleByRoleId(@PathVariable("roleId") @ApiParam(name = "角色id", example = "1") Long roleId) {
@@ -46,19 +55,19 @@ public class RoleController {
 
     @PostMapping(ADD_ROLE)
     @ApiOperation("添加角色接口")
-    public ResultObject<RoleVO> addRole(@RequestBody @Validated({Insert.class}) RoleForm roleForm) {
-        return ResultObject.build(result -> RoleConverter.toVO(roleService.addRole(RoleConverter.toDTO(roleForm))));
+    public ResultObject<Long> addRole(@RequestBody @Validated({Insert.class}) RoleForm roleForm) {
+        return ResultObject.build(result -> roleService.addRole(RoleConverter.toDTO(roleForm)));
     }
 
     @PutMapping(UPDATE_ROLE)
     @ApiOperation("更新角色接口")
-    public ResultObject<RoleVO> updateRole(@RequestBody @Validated({Update.class}) RoleForm roleForm) {
-        return ResultObject.build(result -> RoleConverter.toVO(roleService.updateRole(RoleConverter.toDTO(roleForm))));
+    public ResultObject<Long> updateRole(@RequestBody @Validated({Update.class}) RoleForm roleForm) {
+        return ResultObject.build(result -> roleService.updateRole(RoleConverter.toDTO(roleForm)));
     }
 
     @DeleteMapping(DELETE_ROLE)
     @ApiOperation("删除角色接口")
-    public ResultObject<Boolean> deleteRole(@PathVariable("roleId") @ApiParam(name = "角色id", example = "1") Long roleId) {
+    public ResultObject<Long> deleteRole(@PathVariable("roleId") @ApiParam(name = "角色id", example = "1") Long roleId) {
         return ResultObject.build(result -> roleService.deleteRole(roleId));
     }
 

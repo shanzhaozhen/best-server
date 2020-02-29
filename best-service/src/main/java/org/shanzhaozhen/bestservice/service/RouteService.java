@@ -38,20 +38,20 @@ public interface RouteService {
      * @param routeDTO
      * @return
      */
-    RouteDTO addRoute(RouteDTO routeDTO);
+    Long addRoute(RouteDTO routeDTO);
 
     /**
      * 修改资源
      * @param routeDTO
      * @return
      */
-    RouteDTO updateRoute(RouteDTO routeDTO);
+    Long updateRoute(RouteDTO routeDTO);
 
     /**
      * 删除资源(通过资源id删除)
      * @param routeId
-     * @return true 则删除成功，否则删除失败
+     * @return
      */
-    Boolean deleteRoute(Long routeId);
+    Long deleteRoute(Long routeId);
 
 }
