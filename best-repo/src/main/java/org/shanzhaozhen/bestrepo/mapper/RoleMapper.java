@@ -52,5 +52,5 @@ public interface RoleMapper extends BaseMapper<RoleDO> {
     @Select("select id, name, identification, description, " +
             "created_by, created_date, last_modified_by, last_modified_date " +
             "from sys_role where id != #{id} and identification = #{identification}")
-    RoleDTO getRoleByIdNotInAndIdentification(@Param("id") Long id, @Param("identification") String identification);
+    RoleDTO getRoleByNotEqIdAndIdentification(@Param("id") Long id, @Param("identification") String identification);
 }

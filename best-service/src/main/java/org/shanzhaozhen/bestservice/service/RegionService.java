@@ -9,13 +9,6 @@ import java.util.List;
 public interface RegionService {
 
     /**
-     * 通过用户id获取区域信息
-     * @param userId
-     * @return
-     */
-    List<RegionDTO> getRegionsByUserId(Long userId);
-
-    /**
      * 获取区域信息的分页列表
      * @param baseSearchForm
      * @return
