@@ -18,7 +18,8 @@
         <result column="avatar" property="avatar" />
         <result column="email" property="email" />
         <result column="phone_number" property="phoneNumber" />
-        <result column="address" property="address" />
+        <result column="address_code" property="addressCode" />
+        <result column="detailed_address" property="detailedAddress" />
         <result column="introduction" property="introduction" />
         <result column="created_by" property="createdBy" />
         <result column="created_date" property="createdDate" />
@@ -38,10 +39,10 @@
         </collection>
     </resultMap>
 
-
     <select id="getUserAndRolesByUserId" resultMap="UserRoleMap">
         select id, username, password, account_non_expired, account_non_locked, credentials_non_expired, enabled,
-        name, nickname, sex, birthday, avatar, email, phone_number, address, introduction from sys_user where id = #{id}
+        name, nickname, sex, birthday, avatar, email, phone_number, address_code, detailed_address, introduction
+        from sys_user where id = #{id}
     </select>
 
     <select id="getJWTUserByUserId" resultMap="JWTUserMap">

@@ -1,5 +1,7 @@
 package org.shanzhaozhen.bestapi.exception;
 
+import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.MyBatisSystemException;
 import org.shanzhaozhen.bestcommon.common.sys.ResultType;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     /**
@@ -22,7 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultObject<?> handleIllegalArgumentException(Exception e) {
-        return new ResultObject<>().setCode(ResultType.FAILURE).setMessage(e.getMessage());
+        return new ResultObject<>().setCode(ResultType.FAILURE).setMessage("未知异常错误").setData(e.getMessage());
     }
 
     /**
@@ -44,6 +47,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultObject<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         return new ResultObject<>().setCode(ResultType.FAILURE).setMessage(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
+    }
+
+    /**
+     * 监听SQL执行错误信息
+     * @param e 数据校验事件
+     * @return
+     */
+    @ExceptionHandler(MyBatisSystemException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResultObject<?> handleMyBatisSystemException(MyBatisSystemException e) {
+        return new ResultObject<>().setCode(ResultType.FAILURE).setMessage("执行失败").setData(e.getMessage());
     }
 
 }

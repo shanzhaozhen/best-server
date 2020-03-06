@@ -1,19 +1,14 @@
 package org.shanzhaozhen.bestcommon.form;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Update;
 import org.hibernate.validator.constraints.Length;
-import org.shanzhaozhen.bestcommon.dto.RoleDTO;
-import org.springframework.security.core.GrantedAuthority;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +19,7 @@ import java.util.List;
 public class UserForm {
 
     @ApiModelProperty(value = "主键ID")
+    @NotNull(groups = {Update.class}, message = "用户id不能为空")
     private Long id;
 
     @ApiModelProperty(value = "用户名")
@@ -67,8 +63,12 @@ public class UserForm {
     @ApiModelProperty(value = "手机号码")
     private String phoneNumber;
 
-    @ApiModelProperty(value = "地址")
-    private String address;
+    @ApiModelProperty(value = "地址编号")
+    private String addressCode;
+
+    @ApiModelProperty(value = "详细地址")
+    private String detailedAddress;
+
 
     @ApiModelProperty(value = "个人介绍")
     private String introduction;

@@ -73,7 +73,7 @@ public class ResourceConverter {
     }
 
     /**
-     * 装资源list转成树状结构
+     * 将资源list转成树状结构
      * @param resourceDTOList
      * @return
      */

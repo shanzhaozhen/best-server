@@ -64,8 +64,11 @@ public class UserDO extends BaseEntity {
     @ApiModelProperty(value = "手机号码")
     private String phoneNumber;
 
-    @ApiModelProperty(value = "地址")
-    private String address;
+    @ApiModelProperty(value = "地址编号")
+    private String addressCode;
+
+    @ApiModelProperty(value = "详细地址")
+    private String detailedAddress;
 
     @ApiModelProperty(value = "个人介绍")
     private String introduction;

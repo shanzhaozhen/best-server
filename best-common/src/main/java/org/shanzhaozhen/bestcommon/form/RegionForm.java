@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Update;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +18,7 @@ import javax.validation.constraints.NotEmpty;
 public class RegionForm {
 
     @ApiModelProperty(value = "主键ID")
-    @NotEmpty(groups = {Update.class}, message = "资源id不能为空")
+    @NotNull(groups = {Update.class}, message = "资源id不能为空")
     private Long id;
 
     @ApiModelProperty(value = "父级ID")
@@ -32,7 +33,7 @@ public class RegionForm {
     private String code;
 
     @ApiModelProperty(value = "层级")
-    @NotEmpty(groups = {Insert.class, Update.class}, message = "层级不能为空")
+    @NotNull(groups = {Insert.class, Update.class}, message = "层级不能为空")
     private Integer level;
 
 }

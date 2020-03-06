@@ -19,7 +19,8 @@ CREATE TABLE sys_user
     avatar VARCHAR(255) NULL DEFAULT NULL COMMENT '头像',
 	email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
 	phone_number VARCHAR(11) NULL DEFAULT NULL COMMENT '手机号码',
-	address VARCHAR(255) NULL DEFAULT NULL COMMENT '地址',
+	address_code VARCHAR(255) NULL DEFAULT NULL COMMENT '地址编号',
+	detailed_address VARCHAR(255) NULL DEFAULT NULL COMMENT '详细地址',
 	introduction VARCHAR(255) NULL DEFAULT NULL COMMENT '个人介绍',
 	created_by BIGINT(20) NULL DEFAULT NULL COMMENT '创建人',
     created_date datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -231,7 +232,7 @@ CREATE TABLE sys_dictionary
 /**
 用户表初始数据
 */
-INSERT INTO `sys_user`(`id`, `username`, `password`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `enabled`, `name`, `nickname`, `sex`, `birthday`, `avatar`, `email`, `phone_number`, `address`, `introduction`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (1, 'admin', '$2a$10$ZHloNREZMCnmeSqGlPL4tudSt4QdR4JnFwODJnVsXoWoxAkNMaqda', b'1', b'1', b'1', b'1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_user`(`id`, `username`, `password`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `enabled`, `name`, `nickname`, `sex`, `birthday`, `avatar`, `email`, `phone_number`, `address_code`, `detailed_address`, `introduction`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (1, 'admin', '$2a$10$ZHloNREZMCnmeSqGlPL4tudSt4QdR4JnFwODJnVsXoWoxAkNMaqda', b'1', b'1', b'1', b'1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 /**
 角色表基础数据
@@ -254,11 +255,12 @@ INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`
 INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (5, 'ResourcePermission', 'resource', 1, NULL, '资源管理', NULL, 4, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (6, 'RolePermission', 'role', 1, NULL, '角色管理', NULL, 5, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (7, 'UserPermission', 'user', 1, NULL, '用户管理', NULL, 5, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (8, 'SystemConfig', '/config', null, '/config/task', '系统配置', 'lock', 2, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (8, 'SystemConfig', '/config', null, '/config/task', '系统配置', 'setting', 2, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (9, 'ScheduledTask', 'task', 8, NULL, '定时任务', NULL, 1, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (10, 'Iframe', '/iframe', NULL, 'noRedirect', '开发者工具', 'link', 99, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (11, 'Druid', 'druid', 10, NULL, 'Druid', 'link', 1, b'0', b'0', b'0', b'0', b'1', '{ \"redirect\": \"http://localhost:8080/best/druid\" }', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (12, 'Swagger', 'swagger', 10, NULL, 'Swagger', 'link', 2, b'0', b'0', b'0', b'0', b'1', '{ \"redirect\": \"http://localhost:8080/best/swagger-ui.html\" }', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (10, 'RegionConfig', 'region', 8, NULL, '区域信息', NULL, 1, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (11, 'Iframe', '/iframe', NULL, 'noRedirect', '开发者工具', 'link', 99, b'0', b'0', b'0', b'0', b'1', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (12, 'Druid', 'druid', 11, NULL, 'Druid', 'link', 1, b'0', b'0', b'0', b'0', b'1', '{ \"redirect\": \"http://localhost:8080/best/druid\" }', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_route`(`id`, `name`, `path`, `pid`, `redirect`, `title`, `icon`, `priority`, `hidden`, `always_show`, `no_cache`, `affix`, `breadcrumb`, `props`, `description`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (13, 'Swagger', 'swagger', 11, NULL, 'Swagger', 'link', 2, b'0', b'0', b'0', b'0', b'1', '{ \"redirect\": \"http://localhost:8080/best/swagger-ui.html\" }', NULL, NULL, NULL, NULL, NULL);
 
 /**
 角色-菜单关联表基础数据
@@ -275,6 +277,7 @@ INSERT INTO `sys_role_route`(`id`, `role_id`, `route_id`, `created_by`, `created
 INSERT INTO `sys_role_route`(`id`, `role_id`, `route_id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (10, 1, 10, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_role_route`(`id`, `role_id`, `route_id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (11, 1, 11, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_role_route`(`id`, `role_id`, `route_id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (12, 1, 12, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_role_route`(`id`, `role_id`, `route_id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`) VALUES (13, 1, 13, NULL, NULL, NULL, NULL);
 
 
 /**

@@ -72,7 +72,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public Long updateRole(RoleDTO roleDTO) {
         Assert.notNull(roleDTO.getId(), "角色id不能为空");
-        RoleDTO roleInDB = roleMapper.getRoleByIdNotInAndIdentification(roleDTO.getId(), roleDTO.getIdentification());
+        RoleDTO roleInDB = roleMapper.getRoleByIdNotEqualAndIdentificationEqual(roleDTO.getId(), roleDTO.getIdentification());
         Assert.isNull(roleInDB, "更新失败：标识名称已被占用");
         RoleDO roleDO = roleMapper.selectById(roleDTO.getId());
         Assert.notNull(roleDO, "更新失败：没有找到该角色或已被删除");
