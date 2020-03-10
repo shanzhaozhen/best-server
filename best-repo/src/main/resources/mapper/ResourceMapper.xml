@@ -33,7 +33,9 @@
     </select>
 
     <select id="getResourceRoleListByTypeAndUserId" resultMap="ResourceRoleMap">
-        select * from sys_resource re
+        select re.id, re.name, re.path, re.type, re.pid, re.priority, re.description,
+            re.created_by, re.created_date, re.last_modified_by, re.last_modified_date
+        from sys_resource re
         <if test="userId != null">
             inner join sys_role_resource srr on srr.resource_id = re.id
             inner join sys_role ro on ro.id = srr.role_id

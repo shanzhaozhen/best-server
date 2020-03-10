@@ -51,7 +51,7 @@ public class RegionController {
     @GetMapping(GET_REGION_TREE)
     @ApiOperation("获取所有区域信息")
     public ResultObject<List<RegionVO>> getRegionTree() {
-        return ResultObject.build(result -> RegionConverter.toVO(regionService.getAllRegions()));
+        return ResultObject.build(result -> RegionConverter.toVO(regionService.getRegionTree()));
     }
 
     @GetMapping(GET_REGION_BY_ID)
