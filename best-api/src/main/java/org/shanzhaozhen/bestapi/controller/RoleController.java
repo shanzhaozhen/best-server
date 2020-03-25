@@ -22,12 +22,12 @@ import java.util.List;
 @RestController
 public class RoleController {
 
-    private final String GET_ROLE_PAGE = "/role/page";
-    private final String GET_ROLE_ALL = "/role/all";
-    private final String GET_ROLE_BY_ID = "/role/{roleId}";
-    private final String ADD_ROLE = "/role";
-    private final String UPDATE_ROLE = "/role";
-    private final String DELETE_ROLE = "/role/{roleId}";
+    private static final String GET_ROLE_PAGE = "/role/page";
+    private static final String GET_ROLE_ALL = "/role/all";
+    private static final String GET_ROLE_BY_ID = "/role/{roleId}";
+    private static final String ADD_ROLE = "/role";
+    private static final String UPDATE_ROLE = "/role";
+    private static final String DELETE_ROLE = "/role/{roleId}";
 
     private final RoleService roleService;
 

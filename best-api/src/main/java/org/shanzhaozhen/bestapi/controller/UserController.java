@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private final String GET_USER_INFO = "/user/info";
-    private final String LOGOUT = "/user/logout";
-    private final String GET_USER_PAGE = "/user/page";
-    private final String GET_USER_BY_ID = "/user/{userId}";
-    private final String ADD_USER = "/user";
-    private final String UPDATE_USER = "/user";
-    private final String DELETE_USER = "/user/{userId}";
+    private static final String GET_USER_INFO = "/user/info";
+    private static final String LOGOUT = "/user/logout";
+    private static final String GET_USER_PAGE = "/user/page";
+    private static final String GET_USER_BY_ID = "/user/{userId}";
+    private static final String ADD_USER = "/user";
+    private static final String UPDATE_USER = "/user";
+    private static final String DELETE_USER = "/user/{userId}";
 
 
     private final UserService userService;

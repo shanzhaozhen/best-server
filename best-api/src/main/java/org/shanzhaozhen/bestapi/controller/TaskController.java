@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TaskController {
 
-    private final String GET_TASK_PAGE = "/task/page";
-    private final String GET_TASK_BY_ID = "/task/{taskId}";
-    private final String ADD_TASK = "/task";
-    private final String UPDATE_TASK = "/task";
-    private final String DELETE_TASK = "/task/{taskId}";
-    private final String RUN_TASK = "/task/{taskId}/run";
-    private final String START_TASK = "/task/{taskId}/start";
-    private final String STOP_TASK = "/task/{taskId}/stop";
+    private static final String GET_TASK_PAGE = "/task/page";
+    private static final String GET_TASK_BY_ID = "/task/{taskId}";
+    private static final String ADD_TASK = "/task";
+    private static final String UPDATE_TASK = "/task";
+    private static final String DELETE_TASK = "/task/{taskId}";
+    private static final String RUN_TASK = "/task/{taskId}/run";
+    private static final String START_TASK = "/task/{taskId}/start";
+    private static final String STOP_TASK = "/task/{taskId}/stop";
 
     private final TaskService taskService;
 

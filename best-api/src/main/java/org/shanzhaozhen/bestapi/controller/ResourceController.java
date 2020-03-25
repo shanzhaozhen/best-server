@@ -18,12 +18,12 @@ import java.util.List;
 @RestController
 public class ResourceController {
 
-    private final String GET_ALL_RESOURCE_TREE = "/resource/tree";
-    private final String GET_ALL_RESOURCE_ROOT_TREE = "/resource/root-tree";
-    private final String GET_RESOURCE_BY_ID = "/resource/{resourceId}";
-    private final String ADD_RESOURCE = "/resource";
-    private final String UPDATE_RESOURCE = "/resource";
-    private final String DELETE_RESOURCE = "/resource/{resourceId}";
+    private static final String GET_ALL_RESOURCE_TREE = "/resource/tree";
+    private static final String GET_ALL_RESOURCE_ROOT_TREE = "/resource/root-tree";
+    private static final String GET_RESOURCE_BY_ID = "/resource/{resourceId}";
+    private static final String ADD_RESOURCE = "/resource";
+    private static final String UPDATE_RESOURCE = "/resource";
+    private static final String DELETE_RESOURCE = "/resource/{resourceId}";
 
     private final ResourceService resourceService;
 

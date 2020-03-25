@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RegisterController {
 
-    private final String REGISTER = "/register";
-    private final String CHECK_USERNAME = "/register/{username}";
+    private static final String REGISTER = "/register";
+    private static final String CHECK_USERNAME = "/register/{username}";
 
     private final UserService sysUserService;
 

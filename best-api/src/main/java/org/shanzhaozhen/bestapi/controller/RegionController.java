@@ -22,13 +22,13 @@ import java.util.List;
 @RestController
 public class RegionController {
 
-    private final String GET_REGION_PAGE = "/region/page";
-    private final String GET_REGION_ALL = "/region/all";
-    private final String GET_REGION_TREE = "/region/tree";
-    private final String GET_REGION_BY_ID = "/region/{regionId}";
-    private final String ADD_REGION = "/region";
-    private final String UPDATE_REGION = "/region";
-    private final String DELETE_REGION = "/region/{regionId}";
+    private static final String GET_REGION_PAGE = "/region/page";
+    private static final String GET_REGION_ALL = "/region/all";
+    private static final String GET_REGION_TREE = "/region/tree";
+    private static final String GET_REGION_BY_ID = "/region/{regionId}";
+    private static final String ADD_REGION = "/region";
+    private static final String UPDATE_REGION = "/region";
+    private static final String DELETE_REGION = "/region/{regionId}";
 
     private final RegionService regionService;
 

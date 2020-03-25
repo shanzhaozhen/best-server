@@ -17,11 +17,11 @@ import java.util.List;
 @RestController
 public class RouteController {
 
-    private final String GET_ALL_ROUTE_TREE = "/route/tree";
-    private final String GET_ROUTE_BY_ID = "/route/{routeId}";
-    private final String ADD_ROUTE = "/route";
-    private final String UPDATE_ROUTE = "/route";
-    private final String DELETE_ROUTE = "/route/{routeId}";
+    private static final String GET_ALL_ROUTE_TREE = "/route/tree";
+    private static final String GET_ROUTE_BY_ID = "/route/{routeId}";
+    private static final String ADD_ROUTE = "/route";
+    private static final String UPDATE_ROUTE = "/route";
+    private static final String DELETE_ROUTE = "/route/{routeId}";
 
     private final RouteService routeService;
 

@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 public class BeanController {
 
-    private final String GET_BEAN_LIST = "/bean/list";
-    private final String GET_BEAN_BY_NAME = "/bean/{beanName}";
-    private final String GET_BEAN_METHOD = "/bean/method";
+    private static final String GET_BEAN_LIST = "/bean/list";
+    private static final String GET_BEAN_BY_NAME = "/bean/{beanName}";
+    private static final String GET_BEAN_METHOD = "/bean/method";
 
 
     private final BeanService beanService;

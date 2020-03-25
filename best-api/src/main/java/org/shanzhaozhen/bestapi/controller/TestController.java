@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-    @GetMapping("/admin/test")
+    @GetMapping("/test")
     @ResponseBody
-    public Object testAdmin() {
-        return "a";
+    public Object testInstall() {
+        return "INSTALL SUCCESS!";
     }
 
 }
