@@ -7,6 +7,8 @@
 * [前端项目地址](https://github.com/shanzhaozhen/best-client)
 * [Demo站点](http://best.loogoos.tk)
     > 仅支持ipv6用户访问，因为demo站点是使用我私有的小服务器搭建的的ipv6的方式映射的，[详见：我另外一个仓库（暂时没完善）](https://github.com/shanzhaozhen/MyNAS)
+    > 默认账号：123456
+    > 默认密码：123456
 
 ### 功能实现
 实现功能 | 是否已实现

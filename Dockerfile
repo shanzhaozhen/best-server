@@ -21,4 +21,4 @@ VOLUME /tmp
 # 将当前项目的jar包添加到容器中
 ADD "best-api/target/best.jar" "app.jar"
 # 当容器启动时 执行启动命令
-ENTRYPOINT ["nohup", "java", "-jar", "app.jar", "&"]
+ENTRYPOINT ["java", "-jar", "app.jar", "&"]
