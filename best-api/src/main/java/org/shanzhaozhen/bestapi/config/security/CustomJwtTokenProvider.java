@@ -4,12 +4,10 @@ import io.jsonwebtoken.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.shanzhaozhen.bestcommon.common.sys.JwtErrorConst;
-import org.shanzhaozhen.bestcommon.dto.RoleDTO;
+import org.shanzhaozhen.bestcommon.enums.sys.JwtErrorConst;
 import org.shanzhaozhen.bestcommon.utils.HttpServletResponseUtils;
 import org.shanzhaozhen.bestcommon.dto.JWTUser;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
-import org.shanzhaozhen.bestservice.service.RoleService;
 import org.shanzhaozhen.bestservice.service.UserService;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 @ConfigurationProperties(prefix = "jwt")
 @Getter

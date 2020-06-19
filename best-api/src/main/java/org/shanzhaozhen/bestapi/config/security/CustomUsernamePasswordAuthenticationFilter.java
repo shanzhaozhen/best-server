@@ -1,7 +1,7 @@
 package org.shanzhaozhen.bestapi.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.shanzhaozhen.bestcommon.common.sys.JwtErrorConst;
+import org.shanzhaozhen.bestcommon.enums.sys.JwtErrorConst;
 import org.shanzhaozhen.bestcommon.dto.UserDTO;
 import org.shanzhaozhen.bestcommon.form.UserLoginForm;
 import org.shanzhaozhen.bestcommon.utils.HttpServletResponseUtils;

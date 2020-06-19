@@ -3,7 +3,7 @@ package org.shanzhaozhen.bestapi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.shanzhaozhen.bestcommon.common.sys.ResourceType;
+import org.shanzhaozhen.bestcommon.enums.sys.ResourceType;
 import org.shanzhaozhen.bestcommon.converter.ResourceConverter;
 import org.shanzhaozhen.bestcommon.form.ResourceForm;
 import org.shanzhaozhen.bestcommon.vo.ResourceVO;

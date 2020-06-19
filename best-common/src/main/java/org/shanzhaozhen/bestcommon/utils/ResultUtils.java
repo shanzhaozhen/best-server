@@ -1,6 +1,6 @@
 package org.shanzhaozhen.bestcommon.utils;
 
-import org.shanzhaozhen.bestcommon.common.sys.ResultType;
+import org.shanzhaozhen.bestcommon.enums.sys.ResultType;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
 
 public class ResultUtils {

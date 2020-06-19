@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <name>best-server</name>
-    <url>https://github.com/shanzhaozhen</url>
+    <url>https://github.com/shanzhaozhen/best-server</url>
     <description>The best project about java</description>
 
     <modules>

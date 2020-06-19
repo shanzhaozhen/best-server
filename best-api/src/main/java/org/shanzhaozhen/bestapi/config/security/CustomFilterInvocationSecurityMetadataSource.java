@@ -1,6 +1,6 @@
 package org.shanzhaozhen.bestapi.config.security;
 
-import org.shanzhaozhen.bestcommon.common.sys.ResourceType;
+import org.shanzhaozhen.bestcommon.enums.sys.ResourceType;
 import org.shanzhaozhen.bestcommon.dto.ResourceDTO;
 import org.shanzhaozhen.bestcommon.dto.RoleDTO;
 import org.shanzhaozhen.bestservice.service.ResourceService;

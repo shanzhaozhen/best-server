@@ -2,7 +2,7 @@ package org.shanzhaozhen.bestapi.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.MyBatisSystemException;
-import org.shanzhaozhen.bestcommon.common.sys.ResultType;
+import org.shanzhaozhen.bestcommon.enums.sys.ResultType;
 import org.shanzhaozhen.bestcommon.vo.ResultObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

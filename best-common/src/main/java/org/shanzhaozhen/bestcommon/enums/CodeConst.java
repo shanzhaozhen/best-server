@@ -1,5 +1,10 @@
-package org.shanzhaozhen.bestcommon.common;
+package org.shanzhaozhen.bestcommon.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum CodeConst {
 
     /**
@@ -40,24 +45,4 @@ public enum CodeConst {
     private int code;
     private String reason;
 
-    CodeConst(int code, String reason) {
-        this.code = code;
-        this.reason = reason;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
 }

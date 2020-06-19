@@ -1,4 +1,4 @@
-package org.shanzhaozhen.bestcommon.common.sys;
+package org.shanzhaozhen.bestcommon.enums.sys;
 
 public interface ResultType {
 

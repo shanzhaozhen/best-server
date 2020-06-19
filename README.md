@@ -1,13 +1,14 @@
 # best-admin
 
 ### 介绍
-该项目主要是一个用于开发的基础框架，以供给自己快速开发项目
+该项目主要是一个用于开发的基础框架，以供给自己快速开发项目，也准备制作一般以Spring Cloud技术栈实现的
 
 * [后台项目地址](https://github.com/shanzhaozhen/best-server)
+* [Spring Cloud实现项目地址](https://github.com/shanzhaozhen/best-cloud)
 * [前端项目地址](https://github.com/shanzhaozhen/best-client)
 * [Demo站点](http://best.loogoos.tk)
     > 仅支持ipv6用户访问，因为demo站点是使用我私有的小服务器搭建的的ipv6的方式映射的，[详见：我另外一个仓库（暂时没完善）](https://github.com/shanzhaozhen/MyNAS)
-    > 默认账号：123456
+    > 默认账号：admin
     > 默认密码：123456
 
 ### 功能实现

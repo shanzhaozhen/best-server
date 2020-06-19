@@ -1,5 +1,10 @@
-package org.shanzhaozhen.bestcommon.common.sys;
+package org.shanzhaozhen.bestcommon.enums.sys;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum JwtErrorConst {
 
     LOGIN_SUCCESS(2000, "登陆成功"),
@@ -21,24 +26,4 @@ public enum JwtErrorConst {
     private int code;
     private String reason;
 
-    JwtErrorConst(int code, String reason) {
-        this.code = code;
-        this.reason = reason;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
 }

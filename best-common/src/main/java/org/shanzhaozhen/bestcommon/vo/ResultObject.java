@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shanzhaozhen.bestcommon.common.sys.JwtErrorConst;
-import org.shanzhaozhen.bestcommon.common.sys.ResultType;
+import org.shanzhaozhen.bestcommon.enums.sys.JwtErrorConst;
+import org.shanzhaozhen.bestcommon.enums.sys.ResultType;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
