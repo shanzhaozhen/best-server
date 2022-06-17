@@ -39,7 +39,7 @@
         <jjwt.varsion>0.9.1</jjwt.varsion>
         <swagger.version>2.9.2</swagger.version>
         <druid.version>1.1.21</druid.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <annotations.version>3.0.1</annotations.version>
     </properties>
 
