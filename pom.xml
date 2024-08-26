@@ -37,7 +37,7 @@
         <velocity.version>2.1</velocity.version>
         <ibeetl.version>3.0.10.RELEASE</ibeetl.version>
         <jjwt.varsion>0.9.1</jjwt.varsion>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.10.0</swagger.version>
         <druid.version>1.1.21</druid.version>
         <fastjson.version>1.2.62</fastjson.version>
         <annotations.version>3.0.1</annotations.version>
